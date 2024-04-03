@@ -19,13 +19,12 @@ public record Triangle (double side1, double side2, double side3) {
         System.out.println(text1);
     }
 
-
-    public double triangleArea() {
-        return sqrt(((this.side1 + this.side2 + this.side3) / 2) * (((this.side1 + this.side2 + this.side3) / 2) - this.side1) * (((this.side1 + this.side2 + this.side3) / 2) - this.side2) * (((this.side1 + this.side2 + this.side3) / 2) - this.side3));
-    }
-
     public double trianglePerimeter() {
         return (this.side1+this.side2+this.side3);
+    }
+
+    public double triangleArea() {
+        return sqrt(((trianglePerimeter()) / 2) * (((trianglePerimeter()) / 2) - this.side1) * (((trianglePerimeter()) / 2) - this.side2) * (((trianglePerimeter()) / 2) - this.side3));
     }
 }
 
