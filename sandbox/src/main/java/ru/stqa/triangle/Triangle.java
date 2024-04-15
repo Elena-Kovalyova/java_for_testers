@@ -1,5 +1,7 @@
 package ru.stqa.triangle;
 
+import java.util.Objects;
+
 import static java.lang.Math.sqrt;
 
 public record Triangle (double side1, double side2, double side3) {
@@ -13,8 +15,25 @@ public record Triangle (double side1, double side2, double side3) {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return (Double.compare(this.side1, triangle.side1) == 0 && Double.compare(this.side2, triangle.side2) == 0 && Double.compare(this.side3, triangle.side3) == 0)
+        || (Double.compare(this.side1, triangle.side2) == 0 && Double.compare(this.side2, triangle.side1) == 0 && Double.compare(this.side3, triangle.side3) == 0)
+                || (Double.compare(this.side1, triangle.side3) == 0 && Double.compare(this.side2, triangle.side1) == 0 && Double.compare(this.side3, triangle.side2) == 0)
+                || (Double.compare(this.side1, triangle.side3) == 0 && Double.compare(this.side2, triangle.side2) == 0 && Double.compare(this.side3, triangle.side1) == 0)
+                || (Double.compare(this.side1, triangle.side1) == 0 && Double.compare(this.side2, triangle.side3) == 0 && Double.compare(this.side3, triangle.side2) == 0)
+                || (Double.compare(this.side1, triangle.side2) == 0 && Double.compare(this.side2, triangle.side3) == 0 && Double.compare(this.side3, triangle.side1) == 0);
+            }
 
-      public static void main(String[] args) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(side1, side2, side3);
+    }
+
+    public static void main(String[] args) {
         printTriangleArea(new Triangle(5.0, 6.0, 7.0));
         printTrianglePerimeter(new Triangle (5.0, 6.0, 7.0));
                   }
